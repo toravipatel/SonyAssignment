@@ -14,7 +14,7 @@ Now whenever user wants to load language specific data and then specific languag
 and key will be passed to DB, and Room DB will provide respective value for the same.
 
 In case room DB will not have any specific value than it will return empty value.For
-this case specific value based on the selected language will be retrived from strings.xml
+this case, specific value based on the selected language will be retrived from strings.xml
 file.
 
 #Advantage of using approach:
