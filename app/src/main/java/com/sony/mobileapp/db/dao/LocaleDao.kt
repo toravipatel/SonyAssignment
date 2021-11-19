@@ -2,6 +2,7 @@ package com.sony.mobileapp.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.sony.mobileapp.db.model.LocaleData
 
@@ -10,7 +11,8 @@ import com.sony.mobileapp.db.model.LocaleData
 @Dao
 interface LocaleDao {
 
-    @Insert
+
+    @Insert(onConflict = REPLACE)
     fun insert(localeData: LocaleData)
 
     @Query("select value from LocaleData where languageName =:language and `key`=:key")
