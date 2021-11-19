@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SonyAssignment</string>
+    <string name="hello_world">Hello World Chinese</string>
+    <string name="first_name">First Name Chinese</string>
+    <string name="last_name">Last Name Chinese</string>
+
+</resources>
