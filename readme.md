@@ -4,7 +4,7 @@ App is developed using MVVM architecture. Where the flow will be as per below.
 
 View <-> ViewModel -> Repository -> DBManager/NetworkManager 
 
-On the application launch, data from CSV file will be read and it will be inserted
+On the application launch, data from CSV file kept in Asset folder will be read and it will be inserted
 into the Room DB Table. Room DB table will be as per below.
 
 Language Name, Key Name, Value
