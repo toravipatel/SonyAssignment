@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.sony.mobileapp.viewmodel.LandingPageViewModel
 import com.sony.mobileapp.util.LocaleHelper
 import com.sony.mobileapp.R
+import com.sony.mobileapp.model.FileIOResult
 import com.sony.mobileapp.util.Constant
+import com.sony.mobileapp.util.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnEnglish:Button
     private lateinit var btnChinese:Button
     private var selectedLanguage = Constant.LANGUAGE_ENGLISH
+    private var progressDialog: LoadingDialog? = null
+
 
     private val landingPageViewModel: LandingPageViewModel by viewModels()
     @Inject lateinit var localeHelper: LocaleHelper
@@ -31,9 +35,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        landingPageViewModel.insertDataIntoDB()
         initComponent()
+        initObserver()
+        landingPageViewModel.insertDataIntoDB()
         setListener()
+    }
+
+    private fun initObserver() {
+        landingPageViewModel.getFileIOUpdate().observe(this) {
+
+            when (it) {
+                is FileIOResult.Success -> {
+                    progressDialog?.hideProgressdialog()
+                }
+                is FileIOResult.Loading -> {
+                    progressDialog?.showProgressDialog()
+                }
+                is FileIOResult.Error -> {
+                }
+            }
+        }
     }
 
     /*
@@ -60,6 +81,7 @@ class MainActivity : AppCompatActivity() {
     * Function to init component
     * */
     private fun initComponent() {
+        progressDialog = LoadingDialog(this)
         messageView = findViewById(R.id.textView)
         firstNameTV = findViewById(R.id.firstNameTV)
         lastNameTV = findViewById(R.id.lastNameTV)

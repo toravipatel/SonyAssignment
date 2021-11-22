@@ -33,7 +33,3 @@ Out of Memory as we are not keeping any data into memory at all.
 delay app little on Splash screen. But this is one time process only so we won't face
 delay every time.
 
-
-#Improvement:
-On the application launch , data insertion work is being done Main thread which can be
-transferred to background thread. We can show progress dialog during that time.
